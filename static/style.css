@@ -1,0 +1,17 @@
+/* static/style.css */
+body { font-family: sans-serif; background-color: #f4f4f9; color: #333; margin: 0; }
+nav { background-color: #4A90E2; color: white; padding: 1rem; text-align: center; }
+nav a { color: white; text-decoration: none; }
+main { max-width: 800px; margin: 2rem auto; padding: 1rem; background-color: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+hr { border: 0; height: 1px; background: #ddd; margin: 2rem 0; }
+form { display: flex; flex-direction: column; gap: 0.5rem; }
+input[type="text"] { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+button { padding: 0.7rem; background-color: #4A90E2; color: white; border: none; border-radius: 4px; cursor: pointer; }
+button:hover { background-color: #357ABD; }
+.card-list { display: grid; gap: 1rem; }
+.card-link { text-decoration: none; color: inherit; }
+.card-item { padding: 1rem; border: 1px solid #ddd; border-radius: 4px; transition: background-color 0.2s; }
+.card-item:hover { background-color: #eef; }
+.benefit-list { list-style: none; padding: 0; }
+.benefit-list li { background-color: #f9f9f9; padding: 0.8rem; border-radius: 4px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; }
+.benefit-list li span { background-color: #e0e0e0; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.8em; }

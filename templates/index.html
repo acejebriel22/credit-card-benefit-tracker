@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>My Cards</h2>
+    <div class="card-list">
+        {% for card in cards %}
+            <a href="{{ url_for('card_detail', card_id=card.id) }}" class="card-link">
+                <div class="card-item">
+                    <h3>{{ card.name }}</h3>
+                    <p>{{ card.bank }}</p>
+                </div>
+            </a>
+        {% else %}
+            <p>You haven't added any cards yet.</p>
+        {% endfor %}
+    </div>
+
+    <hr>
+    <h2>Add a New Card</h2>
+    <form action="/add_card" method="post">
+        <input type="text" name="name" placeholder="Card Name (e.g., Gold Card)" required>
+        <input type="text" name="bank" placeholder="Bank (e.g., American Express)" required>
+        <button type="submit">Add Card</button>
+    </form>
+{% endblock %}

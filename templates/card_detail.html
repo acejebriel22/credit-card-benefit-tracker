@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>{{ card.name }} - <small>{{ card.bank }}</small></h2>
+    
+    <h3>Benefits</h3>
+    <ul class="benefit-list">
+        {% for benefit in benefits %}
+            <li>
+                <strong>{{ benefit.description }}</strong>
+                <span>Category: {{ benefit.category }}</span>
+            </li>
+        {% else %}
+            <li>No benefits added for this card yet.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <h3>Add a New Benefit</h3>
+    <form action="{{ url_for('add_benefit', card_id=card.id) }}" method="post">
+        <input type="text" name="description" placeholder="Benefit Description" required>
+        <input type="text" name="category" placeholder="Category (e.g., Rewards, Credits)" required>
+        <button type="submit">Add Benefit</button>
+    </form>
+{% endblock %}
