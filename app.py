@@ -7,13 +7,18 @@ app = Flask(__name__)
 # Route for the home page - shows all cards
 @app.route('/')
 def index():
-    cards = db.get_all_cards()
+    conn = db.get_db()
+    cards = conn.execute('SELECT * FROM cards').fetchall()
+    conn.close()
     return render_template('index.html', cards=cards)
 
 # Route to show details for a single card
 @app.route('/card/<int:card_id>')
 def card_detail(card_id):
-    card, benefits = db.get_card_and_benefits(card_id)
+    conn = db.get_db()
+    card = conn.execute('SELECT * FROM cards WHERE id = ?', (card_id,)).fetchone()
+    benefits = conn.execute('SELECT * FROM benefits WHERE card_id = ?', (card_id,)).fetchall()
+    conn.close()
     return render_template('card_detail.html', card=card, benefits=benefits)
 
 # Route to handle adding a new card
@@ -32,12 +37,8 @@ def add_benefit(card_id):
     db.add_benefit(card_id, description, category)
     return redirect(url_for('card_detail', card_id=card_id))
 
-# This part is important for Render to initialize the database
-@app.cli.command("init-db")
-def init_db_command():
-    """Initializes the database."""
-    db.init_db()
-    print("Initialized the database.")
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Initialize the database if it doesn't exist
+    db.init_db()
+    # Run the Flask app
+    app.run(debug=True) # debug=True lets you see errors and auto-reloads
